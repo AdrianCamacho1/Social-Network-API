@@ -57,6 +57,16 @@ const userController = {
         })
         .catch((err)=> res.json(err));
     },
+    deleteUser({ params },res) {
+        User.findOneAndDelete({ _id: params.id})
+        .then ((dbUserData) => {
+            if (!dbUserData) {
+                return res.status(404).json({ message: "error"});
+            }
+            return Thought.deleteMany({ _id: { $in: dbUserData.thought} });
+        })
+        .catch((err)=> res.json(err));
+    },
     addFriend({ params }, res ){
         User.findOneAndUpdate(
             {_id: params.userId},
