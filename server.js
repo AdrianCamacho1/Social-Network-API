@@ -13,4 +13,4 @@ db.once("open", ()=> {
     app.listen(PORT, ()=> {
         console.log(`This Api server is being ran on port ${PORT}`);
     })
-})
+});
